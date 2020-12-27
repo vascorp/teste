@@ -751,7 +751,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         $scope.input.deficiente = false;
         $scope.input.refeicao_tipo = $scope.tipos_subsidio_refeicao[0];
         $scope.input.taxa_ss = 11;
-        $scope.input.duodecimos_tipo = $scope.duodecimos[3];
+        $scope.input.duodecimos_tipo = $scope.duodecimos[0];
         $scope.change();
     }
 
@@ -886,7 +886,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             else
                 result.subsidio_refeicao = input.refeicao_valor * input.refeicao_dias;
 
-            //result.subsidio_refeicao = result.subsidio_refeicao * 11; //11meses
+            result.subsidio_refeicao = result.subsidio_refeicao * 11; //11meses
             //console.log('result.subsidio_refeicao', result.subsidio_refeicao)
             result.tributavel += Math.max(input.refeicao_valor - input.refeicao_tipo.isento, 0) * input.refeicao_dias;
             result.tributavel_coverflex += Math.max(input.refeicao_valor - input.refeicao_tipo.isento, 0) * input.refeicao_dias;
