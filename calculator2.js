@@ -847,7 +847,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         result.tributavel = 0;
         result.tributavel_coverflex = 0;
         result.incidencia = 0;
-        result.indicencia_coverflex = 0;
+        result.incidencia_coverflex = 0;
         result.subsidios = 0;
         result.subsidio_refeicao = 0;
         result.extra_subsidio_refeicao = 0;
@@ -860,7 +860,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.tributavel += input.base;
             result.tributavel_coverflex += input.base - input.outros_isentos;
             result.incidencia += input.base;
-            result.indicencia_coverflex += input.base - input.outros_isentos;
+            result.incidencia_coverflex += input.base - input.outros_isentos;
         }
 
         if (input.extra) {
@@ -878,7 +878,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
                 result.subsidio_refeicao = input.refeicao_tipo.isento * input.refeicao_dias;
                 result.extra_subsidio_refeicao = (input.refeicao_valor * input.refeicao_dias) - (input.refeicao_tipo.isento * input.refeicao_dias);
                 result.incidencia += result.extra_subsidio_refeicao;
-                result.indicencia_coverflex += result.extra_subsidio_refeicao;
+                result.incidencia_coverflex += result.extra_subsidio_refeicao;
             }
             else
                 result.subsidio_refeicao = input.refeicao_valor * input.refeicao_dias;
@@ -894,7 +894,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.tributavel += input.outros_IRS_SS;
             result.tributavel_coverflex += input.outros_IRS_SS;
             result.incidencia += input.outros_IRS_SS;
-            result.indicencia_coverflex += input.outros_IRS_SS;
+            result.incidencia_coverflex += input.outros_IRS_SS;
         }
         if (input.outros_IRS) {
             result.bruto += input.outros_IRS;
@@ -951,7 +951,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.subsidios = (base / .12) / 100;
 
             result.incidencia += result.subsidios;
-            result.indicencia_coverflex += result.subsidios;
+            result.incidencia_coverflex += result.subsidios;
         }
 
         result.retencao = Math.floor(result.tributavel * result.taxa);
