@@ -853,6 +853,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         result.extra_subsidio_refeicao = 0;
         result.duodecimos_retencao = 0;
         result.duodecimos_retencao_coverflex = 0;
+        result.net_gain = 0;
 
         if (input.base) {
             result.bruto += input.base;
@@ -865,7 +866,9 @@ function SalarioLiquidoCtrl($scope, $timeout) {
 
         if (input.extra) {
             result.bruto += input.extra;
+            result.bruto += input.extra;
             result.incidencia += input.extra;
+            result.incidencia_coverflex += input.extra;
         }
 
         // alteração para suportar o não tenho subs alimentação
@@ -973,6 +976,8 @@ function SalarioLiquidoCtrl($scope, $timeout) {
 
         console.log('result.total_taxas', result.total_taxas)
         console.log('result.total_taxas_coverflex', result.total_taxas_coverflex)
+
+        result.net_gain = Math.round(result.total_taxas - result.total_taxas_coverflex);
 
         // novo campo do custo total para empresa;
         result.custo_total_empresa = (result.incidencia * empresa_taxa_ss_social) + result.subsidio_refeicao + input.outros_IRS + input.outros_isentos;
