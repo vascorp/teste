@@ -858,9 +858,9 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.bruto += input.base;
             result.bruto_coverflex += input.base;
             result.tributavel += input.base;
-            result.tributavel_coverflex += input.base;
+            result.tributavel_coverflex += input.base - input.outros_isentos;
             result.incidencia += input.base;
-            result.indicencia_coverflex += input.base;
+            result.indicencia_coverflex += input.base - input.outros_isentos;
         }
 
         if (input.extra) {
@@ -904,7 +904,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         }
         if (input.outros_isentos) {
             result.bruto += input.outros_isentos;
-            result.bruto_coverflex -= input.outros_isentos; //todo
+            result.bruto_coverflex += input.outros_isentos;
         }
 
         if (input.refeicao && (input.refeicao_valor > input.refeicao_tipo.isento)) {
@@ -966,10 +966,10 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         result.seg_social_coverflex = Math.round(result.incidencia_coverflex * input.taxa_ss) / 100;
 
         result.valor_liquido = Math.round(((result.bruto - result.retencao - result.seg_social) + result.subsidios) * 100) / 100;
-        result.valor_liquido_coverflex = Math.round(((result.bruto_coverflex - result.retencao_coverflex - result.seg_social) + result.subsidios) * 100) / 100;
+        result.valor_liquido_coverflex = Math.round(((result.bruto_coverflex - result.retencao_coverflex - result.seg_social_coverflex) + result.subsidios) * 100) / 100;
 
         result.total_taxas = Math.round((result.retencao + result.seg_social) * 100) / 100;
-        result.total_taxas_coverflex = Math.round((result.retencao_coverflex + result.seg_social) * 100) / 100;
+        result.total_taxas_coverflex = Math.round((result.retencao_coverflex + result.seg_social_coverflex) * 100) / 100;
 
         console.log('result.total_taxas', result.total_taxas)
         console.log('result.total_taxas_coverflex', result.total_taxas_coverflex)
