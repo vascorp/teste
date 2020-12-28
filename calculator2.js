@@ -855,12 +855,19 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         result.duodecimos_retencao_coverflex = 0;
         result.net_gain = 0;
         result.benefits_plan = Math.round(input.outros_isentos * 14) / 12;
+        result.twelfth = 0;
+        result.twelfth_coverflex = 0;
 
         if (input.base) {
             result.bruto += input.base + input.outros_isentos;
             result.bruto_coverflex += input.base;
+
+            result.twelfth = (result.bruto / 12) * 2;
+            result.twelfth_coverflex = (result.bruto_coverflex / 12) * 2;
+
             result.tributavel += input.base + input.outros_isentos;
             result.tributavel_coverflex += input.base;
+
             result.incidencia += input.base + input.outros_isentos
             result.incidencia_coverflex += input.base;
         }
