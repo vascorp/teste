@@ -865,11 +865,11 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.twelfth = (result.bruto / 12) * 2;
             result.twelfth_coverflex = (result.bruto_coverflex / 12) * 2;
 
-            result.tributavel += input.base + input.outros_isentos;
-            result.tributavel_coverflex += input.base;
+            result.tributavel += input.base + input.outros_isentos + result.twelfth;
+            result.tributavel_coverflex += input.base + result.twelfth_coverflex;
 
-            result.incidencia += input.base + input.outros_isentos
-            result.incidencia_coverflex += input.base;
+            result.incidencia += input.base + input.outros_isentos + result.twelfth;
+            result.incidencia_coverflex += input.base + result.twelfth_coverflex;
         }
 
         if (input.extra) {
