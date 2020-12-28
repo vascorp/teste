@@ -856,12 +856,12 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         result.net_gain = 0;
 
         if (input.base) {
-            result.bruto += input.base;
+            result.bruto += input.base + input.outros_isentos;
             result.bruto_coverflex += input.base;
             result.tributavel += input.base;
-            result.tributavel_coverflex += input.base - input.outros_isentos;
-            result.incidencia += input.base;
-            result.incidencia_coverflex += input.base - input.outros_isentos;
+            result.tributavel_coverflex += input.base;
+            result.incidencia += input.base + input.outros_isentos
+            result.incidencia_coverflex += input.base;
         }
 
         if (input.extra) {
