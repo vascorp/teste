@@ -858,7 +858,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         if (input.base) {
             result.bruto += input.base + input.outros_isentos;
             result.bruto_coverflex += input.base;
-            result.tributavel += input.base;
+            result.tributavel += input.base + input.outros_isentos;
             result.tributavel_coverflex += input.base;
             result.incidencia += input.base + input.outros_isentos
             result.incidencia_coverflex += input.base;
