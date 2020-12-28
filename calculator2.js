@@ -81,7 +81,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
     //LEGISREF:
     $scope.tipos_subsidio_refeicao = [
         { tipo: "NAOTENHO", descricao: "Não tenho", isento: null },
-        { tipo: "CARTAO", descricao: "Cartão/Vales refeição", isento: 7.63 }
+        { tipo: "CARTAO", descricao: "Cartão/Vales refeição", isento: 7.63 },
         //{ tipo: "DINHEIRO", descricao: "Remuneração", isento: 4.77 }
     ];
 
@@ -863,7 +863,8 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.incidencia += input.base;
             result.incidencia_coverflex += input.base + (input.outros_isentos * 0.5 / 12)
         }
-
+        console.log('result.tributavel_coverflex', result.tributavel_coverflex)
+        console.log('result.incidencia_coverflex', result.incidencia_coverflex)
 
         if (input.extra) {
             result.bruto += input.extra;
@@ -930,6 +931,9 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         result.taxa = getTaxa(tabela, result.tributavel, deps);
         result.taxa_coverflex = getTaxa(tabela, result.tributavel_coverflex, deps);
 
+        console.log('result.taxa', result.taxa);
+        console.log('result.taxa_coverflex', result.taxa_coverflex);
+
         if (angular.isDefined(input.duodecimos_tipo) && input.duodecimos_tipo != null && input.duodecimos_tipo.tipo != "NAOTENHO") {
             result.taxa_de_duodecimos = getTaxa(tabela, input.base, deps);
             //result.taxa_de_duodecimos_coverflex = getTaxa(tabela, input.base, deps);
@@ -966,19 +970,21 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.retencao_coverflex += result.duodecimos_retencao;
         }
 
-        result.seg_social = (result.incidencia * input.taxa_ss) / 100;
-        result.seg_social_coverflex = (result.incidencia_coverflex * input.taxa_ss) / 100;
+        result.seg_social = Math.round(result.incidencia * input.taxa_ss) / 100;
+        result.seg_social_coverflex = Math.round(result.incidencia_coverflex * input.taxa_ss) / 100;
+        console.log('result.seg_social', result.seg_social);
+        console.log('result.seg_soseg_social_coverflexcial', result.seg_social_coverflex);
 
-        result.valor_liquido = (((result.bruto - result.retencao - result.seg_social) + result.subsidios) * 100) / 100;
-        result.valor_liquido_coverflex = (((result.bruto_coverflex - result.retencao_coverflex - result.seg_social_coverflex) + result.subsidios) * 100) / 100;
+        result.valor_liquido = Math.round(((result.bruto - result.retencao - result.seg_social) + result.subsidios) * 100) / 100;
+        result.valor_liquido_coverflex = Math.round(((result.bruto_coverflex - result.retencao_coverflex - result.seg_social_coverflex) + result.subsidios) * 100) / 100;
 
-        result.total_taxas = ((result.retencao + result.seg_social) * 100) / 100;
-        result.total_taxas_coverflex = ((result.retencao_coverflex + result.seg_social_coverflex) * 100) / 100;
+        result.total_taxas = Math.round((result.retencao + result.seg_social) * 100) / 100;
+        result.total_taxas_coverflex = Math.round((result.retencao_coverflex + result.seg_social_coverflex) * 100) / 100;
 
         console.log('result.total_taxas', result.total_taxas)
         console.log('result.total_taxas_coverflex', result.total_taxas_coverflex)
 
-        result.net_gain = (result.total_taxas - result.total_taxas_coverflex);
+        result.net_gain = Math.round(result.total_taxas - result.total_taxas_coverflex);
 
         // novo campo do custo total para empresa;
         result.custo_total_empresa = (result.incidencia * empresa_taxa_ss_social) + result.subsidio_refeicao + input.outros_IRS + input.outros_isentos;
