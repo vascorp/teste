@@ -958,8 +958,8 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.incidencia_coverflex += result.subsidios;
         }
 
-        result.retencao = result.tributavel * result.taxa;
-        result.retencao_coverflex = result.tributavel_coverflex * result.taxa_coverflex;
+        result.retencao = Math.floor(result.tributavel * result.taxa);
+        result.retencao_coverflex = Math.floor(result.tributavel_coverflex * result.taxa_coverflex);
 
         if (result.duodecimos_retencao) {
             result.retencao += result.duodecimos_retencao;
