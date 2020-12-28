@@ -854,6 +854,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         result.duodecimos_retencao = 0;
         result.duodecimos_retencao_coverflex = 0;
         result.net_gain = 0;
+        result.benefits_plan = Math.round(input.outros_isentos * 14) / 12;
 
         if (input.base) {
             result.bruto += input.base + input.outros_isentos;
