@@ -82,7 +82,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
     $scope.tipos_subsidio_refeicao = [
         { tipo: "NAOTENHO", descricao: "Não tenho", isento: null },
         { tipo: "CARTAO", descricao: "Cartão/Vales refeição", isento: 7.63 },
-        //{ tipo: "DINHEIRO", descricao: "Remuneração", isento: 4.77 }
+        { tipo: "DINHEIRO", descricao: "Remuneração", isento: 4.77 }
     ];
 
     $scope.duodecimos = [
@@ -859,12 +859,15 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.bruto += input.base;
             result.bruto_coverflex += input.base;
             result.tributavel += input.base;
-            result.tributavel_coverflex += input.base + (input.outros_isentos * 0.5 / 12)
+            result.tributavel_coverflex += input.base - input.outros_isentos;
             result.incidencia += input.base;
-            result.incidencia_coverflex += input.base + (input.outros_isentos * 0.5 / 12)
+            result.incidencia_coverflex += input.base - input.outros_isentos;
         }
-        console.log('result.tributavel_coverflex', result.tributavel_coverflex)
-        console.log('result.incidencia_coverflex', result.incidencia_coverflex)
+
+        console.log('result.tributavel_coverflex', result.tributavel_coverflex);
+
+        //65000 / 14 + (10000 * 0.5 / 12)
+
 
         if (input.extra) {
             result.bruto += input.extra;
@@ -931,9 +934,6 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         result.taxa = getTaxa(tabela, result.tributavel, deps);
         result.taxa_coverflex = getTaxa(tabela, result.tributavel_coverflex, deps);
 
-        console.log('result.taxa', result.taxa);
-        console.log('result.taxa_coverflex', result.taxa_coverflex);
-
         if (angular.isDefined(input.duodecimos_tipo) && input.duodecimos_tipo != null && input.duodecimos_tipo.tipo != "NAOTENHO") {
             result.taxa_de_duodecimos = getTaxa(tabela, input.base, deps);
             //result.taxa_de_duodecimos_coverflex = getTaxa(tabela, input.base, deps);
@@ -972,8 +972,6 @@ function SalarioLiquidoCtrl($scope, $timeout) {
 
         result.seg_social = Math.round(result.incidencia * input.taxa_ss) / 100;
         result.seg_social_coverflex = Math.round(result.incidencia_coverflex * input.taxa_ss) / 100;
-        console.log('result.seg_social', result.seg_social);
-        console.log('result.seg_soseg_social_coverflexcial', result.seg_social_coverflex);
 
         result.valor_liquido = Math.round(((result.bruto - result.retencao - result.seg_social) + result.subsidios) * 100) / 100;
         result.valor_liquido_coverflex = Math.round(((result.bruto_coverflex - result.retencao_coverflex - result.seg_social_coverflex) + result.subsidios) * 100) / 100;
