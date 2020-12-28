@@ -80,9 +80,9 @@ function SalarioLiquidoCtrl($scope, $timeout) {
 
     //LEGISREF:
     $scope.tipos_subsidio_refeicao = [
-        { tipo: "NAOTENHO", descricao: "Não tenho", isento: null },
-        { tipo: "CARTAO", descricao: "Cartão/Vales refeição", isento: 7.63 },
-        { tipo: "DINHEIRO", descricao: "Remuneração", isento: 4.77 }
+        { tipo: "NAOTENHO", descricao: "No", isento: null },
+        { tipo: "CARTAO", descricao: "Yes", isento: 7.63 }
+        //{ tipo: "DINHEIRO", descricao: "Remuneração", isento: 4.77 }
     ];
 
     $scope.duodecimos = [
