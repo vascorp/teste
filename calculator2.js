@@ -81,8 +81,8 @@ function SalarioLiquidoCtrl($scope, $timeout) {
     //LEGISREF:
     $scope.tipos_subsidio_refeicao = [
         { tipo: "NAOTENHO", descricao: "Não tenho", isento: null },
-        { tipo: "CARTAO", descricao: "Cartão/Vales refeição", isento: 7.63 },
-        { tipo: "DINHEIRO", descricao: "Remuneração", isento: 4.77 }
+        { tipo: "CARTAO", descricao: "Cartão/Vales refeição", isento: 7.63 }
+        //{ tipo: "DINHEIRO", descricao: "Remuneração", isento: 4.77 }
     ];
 
     $scope.duodecimos = [
@@ -859,10 +859,11 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.bruto += input.base;
             result.bruto_coverflex += input.base;
             result.tributavel += input.base;
-            result.tributavel_coverflex += input.base - input.outros_isentos;
+            result.tributavel_coverflex += input.base + (input.outros_isentos * 0.5 / 12)
             result.incidencia += input.base;
-            result.incidencia_coverflex += input.base - input.outros_isentos;
+            result.incidencia_coverflex += input.base + (input.outros_isentos * 0.5 / 12)
         }
+
 
         if (input.extra) {
             result.bruto += input.extra;
