@@ -871,7 +871,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.incidencia += input.base + input.outros_IRS_SS;
             result.incidencia_coverflex += input.base;
 
-            result.benefits_plan = input.outros_IRS_SS;
+            //result.benefits_plan = input.outros_IRS_SS;
         }
 
         if (input.extra) {
@@ -911,10 +911,11 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.incidencia_coverflex += input.outros_IRS_SS;
         }
         */
-
-        result.bruto_coverflex += input.outros_IRS_SS / 2;
-        result.tributavel_coverflex += input.outros_IRS_SS / 2;
-        result.bruto_coverflex += input.outros_isentos / 2;
+        var half_benefits = ((input.outros_IRS_SS / 14) * 14 / 12) / 2;
+        result.bruto_coverflex += half_benefits;
+        result.tributavel_coverflex += half_benefits;
+        result.bruto_coverflex += half_benefits; //isento IRS e SS
+        result.benefits_plan = half_benefits * 2;
 
         if (input.outros_IRS) {
             result.bruto += input.outros_IRS;
