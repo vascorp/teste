@@ -854,22 +854,24 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         result.duodecimos_retencao = 0;
         result.duodecimos_retencao_coverflex = 0;
         result.net_gain = 0;
-        result.benefits_plan = Math.round(input.outros_isentos * 14) / 12;
+        result.benefits_plan = 0;
         result.twelfth = 0;
         result.twelfth_coverflex = 0;
 
         if (input.base) {
-            result.bruto += input.base;
+            result.bruto += input.base + outros_IRS_SS;
             result.bruto_coverflex += input.base;
 
             result.twelfth = (result.bruto / 12) * 2;
             result.twelfth_coverflex = (result.bruto_coverflex / 12) * 2;
 
-            result.tributavel += input.base;
+            result.tributavel += input.base + outros_IRS_SS;
             result.tributavel_coverflex += input.base;
 
-            result.incidencia += input.base;
+            result.incidencia += input.base + outros_IRS_SS;
             result.incidencia_coverflex += input.base;
+
+            result.benefits_plan = outros_IRS_SS;
         }
 
         if (input.extra) {
@@ -899,14 +901,21 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.tributavel += Math.max(input.refeicao_valor - input.refeicao_tipo.isento, 0) * input.refeicao_dias;
             result.tributavel_coverflex += Math.max(input.refeicao_valor - input.refeicao_tipo.isento, 0) * input.refeicao_dias;
         }
+        /*
         if (input.outros_IRS_SS) {
             result.bruto += input.outros_IRS_SS;
-            //result.bruto_coverflex += input.outros_IRS_SS;
+            result.bruto_coverflex += input.outros_IRS_SS;
             result.tributavel += input.outros_IRS_SS;
-            //result.tributavel_coverflex += input.outros_IRS_SS;
+            result.tributavel_coverflex += input.outros_IRS_SS;
             result.incidencia += input.outros_IRS_SS;
-            //result.incidencia_coverflex += input.outros_IRS_SS;
+            result.incidencia_coverflex += input.outros_IRS_SS;
         }
+        */
+
+        result.bruto_coverflex += input.outros_IRS_SS / 2;
+        result.tributavel_coverflex += input.outros_IRS_SS / 2;
+        result.bruto_coverflex += input.outros_isentos / 2;
+
         if (input.outros_IRS) {
             result.bruto += input.outros_IRS;
             result.bruto_coverflex += input.outros_IRS;
