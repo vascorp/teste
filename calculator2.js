@@ -901,11 +901,11 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         }
         if (input.outros_IRS_SS) {
             result.bruto += input.outros_IRS_SS;
-            result.bruto_coverflex += input.outros_IRS_SS;
+            //result.bruto_coverflex += input.outros_IRS_SS;
             result.tributavel += input.outros_IRS_SS;
-            result.tributavel_coverflex += input.outros_IRS_SS;
+            //result.tributavel_coverflex += input.outros_IRS_SS;
             result.incidencia += input.outros_IRS_SS;
-            result.incidencia_coverflex += input.outros_IRS_SS;
+            //result.incidencia_coverflex += input.outros_IRS_SS;
         }
         if (input.outros_IRS) {
             result.bruto += input.outros_IRS;
