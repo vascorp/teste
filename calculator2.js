@@ -751,7 +751,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         $scope.input.deficiente = false;
         $scope.input.refeicao_tipo = $scope.tipos_subsidio_refeicao[0];
         $scope.input.taxa_ss = 11;
-        $scope.input.duodecimos_tipo = $scope.duodecimos[0];
+        $scope.input.duodecimos_tipo = $scope.duodecimos[4];
         $scope.change();
     }
 
@@ -859,17 +859,17 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         result.twelfth_coverflex = 0;
 
         if (input.base) {
-            result.bruto += input.base + input.outros_isentos;
+            result.bruto += input.base;
             result.bruto_coverflex += input.base;
 
             result.twelfth = (result.bruto / 12) * 2;
             result.twelfth_coverflex = (result.bruto_coverflex / 12) * 2;
 
-            result.tributavel += input.base + input.outros_isentos + result.twelfth;
-            result.tributavel_coverflex += input.base + result.twelfth_coverflex;
+            result.tributavel += input.base;
+            result.tributavel_coverflex += input.base;
 
-            result.incidencia += input.base + input.outros_isentos + result.twelfth;
-            result.incidencia_coverflex += input.base + result.twelfth_coverflex;
+            result.incidencia += input.base;
+            result.incidencia_coverflex += input.base;
         }
 
         if (input.extra) {
