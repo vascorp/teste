@@ -865,13 +865,13 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.twelfth = (result.bruto / 12) * 2;
             result.twelfth_coverflex = (result.bruto_coverflex / 12) * 2;
 
-            result.tributavel += input.base + outros_IRS_SS;
+            result.tributavel += input.base + input.outros_IRS_SS;
             result.tributavel_coverflex += input.base;
 
-            result.incidencia += input.base + outros_IRS_SS;
+            result.incidencia += input.base + input.outros_IRS_SS;
             result.incidencia_coverflex += input.base;
 
-            result.benefits_plan = outros_IRS_SS;
+            result.benefits_plan = input.outros_IRS_SS;
         }
 
         if (input.extra) {
