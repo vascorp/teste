@@ -911,11 +911,12 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.incidencia_coverflex += input.outros_IRS_SS;
         }
         */
-        var half_benefits = ((input.outros_IRS_SS / 14) * 14 / 12) / 2;
+        var half_benefits = (input.outros_IRS_SS * 14 / 12) / 2;
+        console.log('half_benefits', half_benefits);
         result.bruto_coverflex += half_benefits;
         result.tributavel_coverflex += half_benefits;
         result.bruto_coverflex += half_benefits; //isento IRS e SS
-        result.benefits_plan = half_benefits * 2;
+        result.benefits_plan += half_benefits * 2;
 
         if (input.outros_IRS) {
             result.bruto += input.outros_IRS;
