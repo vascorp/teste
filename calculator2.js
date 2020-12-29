@@ -849,6 +849,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         result.incidencia = 0;
         result.incidencia_coverflex = 0;
         result.subsidios = 0;
+        result.subsidios_coverflex = 0;
         result.subsidio_refeicao = 0;
         result.extra_subsidio_refeicao = 0;
         result.duodecimos_retencao = 0;
@@ -912,7 +913,6 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         }
         */
         var half_benefits = (input.outros_IRS_SS * 14 / 12) / 2;
-        console.log('half_benefits', half_benefits);
         result.bruto_coverflex += half_benefits;
         result.tributavel_coverflex += half_benefits;
         result.bruto_coverflex += half_benefits; //isento IRS e SS
@@ -949,9 +949,12 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         result.taxa_coverflex = getTaxa(tabela, result.tributavel_coverflex, deps);
 
         if (angular.isDefined(input.duodecimos_tipo) && input.duodecimos_tipo != null && input.duodecimos_tipo.tipo != "NAOTENHO") {
-            result.taxa_de_duodecimos = getTaxa(tabela, input.base, deps);
-            //result.taxa_de_duodecimos_coverflex = getTaxa(tabela, input.base, deps);
+            var calc_base = input.base + input.outros_IRS_SS;
+            var calc_base_coverflex = input.base;
+            result.taxa_de_duodecimos = getTaxa(tabela, calc_base, deps);
+            result.taxa_de_duodecimos_coverflex = getTaxa(tabela, calc_base_coverflex, deps);
             var base = 0;
+            var base_coverflex = 0;
             switch (input.duodecimos_tipo.tipo) {
                 case '1x50%': {
                     base = input.base / 2;
@@ -964,16 +967,19 @@ function SalarioLiquidoCtrl($scope, $timeout) {
                     break;
                 }
                 case '2x100%': {
-                    base = input.base * 2;
-                    result.duodecimos_retencao = Math.floor(((input.base / 12)) * result.taxa_de_duodecimos) * 2;
+                    base = calc_base * 2;
+                    base_coverflex = calc_base_coverflex * 2;
+                    result.duodecimos_retencao = Math.floor(((calc_base / 12)) * result.taxa_de_duodecimos) * 2;
+                    result.duodecimos_retencao_coverflex = Math.floor(((calc_base_coverflex / 12)) * result.taxa_de_duodecimos_coverflex) * 2;
                     break;
                 }
             }
 
             result.subsidios = (base / .12) / 100;
+            result.subsidios_coverflex = (base_coverflex / .12) / 100;
 
             result.incidencia += result.subsidios;
-            result.incidencia_coverflex += result.subsidios;
+            result.incidencia_coverflex += result.subsidios_coverflex;
         }
 
         result.retencao = Math.floor(result.tributavel * result.taxa);
@@ -988,7 +994,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         result.seg_social_coverflex = Math.round(result.incidencia_coverflex * input.taxa_ss) / 100;
 
         result.valor_liquido = Math.round(((result.bruto - result.retencao - result.seg_social) + result.subsidios) * 100) / 100;
-        result.valor_liquido_coverflex = Math.round(((result.bruto_coverflex - result.retencao_coverflex - result.seg_social_coverflex) + result.subsidios) * 100) / 100;
+        result.valor_liquido_coverflex = Math.round(((result.bruto_coverflex - result.retencao_coverflex - result.seg_social_coverflex) + result.subsidios_coverflex) * 100) / 100;
 
         result.total_taxas = Math.round((result.retencao + result.seg_social) * 100) / 100;
         result.total_taxas_coverflex = Math.round((result.retencao_coverflex + result.seg_social_coverflex) * 100) / 100;
