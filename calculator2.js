@@ -751,7 +751,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         $scope.input.deficiente = false;
         $scope.input.refeicao_tipo = $scope.tipos_subsidio_refeicao[0];
         $scope.input.taxa_ss = 11;
-        $scope.input.duodecimos_tipo = $scope.duodecimos[4];
+        $scope.input.duodecimos_tipo = $scope.duodecimos[3];
         $scope.change();
     }
 
