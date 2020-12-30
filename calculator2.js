@@ -969,8 +969,8 @@ function SalarioLiquidoCtrl($scope, $timeout) {
                 case '2x100%': {
                     base = calc_base * 2;
                     base_coverflex = calc_base_coverflex * 2;
-                    result.duodecimos_retencao = Math.floor(((calc_base / 12)) * result.taxa_de_duodecimos) * 2;
-                    result.duodecimos_retencao_coverflex = Math.floor(((calc_base_coverflex / 12)) * result.taxa_de_duodecimos_coverflex) * 2;
+                    result.duodecimos_retencao = (((calc_base / 12)) * result.taxa_de_duodecimos) * 2;
+                    result.duodecimos_retencao_coverflex = (((calc_base_coverflex / 12)) * result.taxa_de_duodecimos_coverflex) * 2;
                     break;
                 }
             }
