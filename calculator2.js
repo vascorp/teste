@@ -1002,11 +1002,11 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         console.log('result.total_taxas', result.total_taxas)
         console.log('result.total_taxas_coverflex', result.total_taxas_coverflex)
 
-        result.net_gain = Math.round(result.total_taxas - result.total_taxas_coverflex);
+        result.net_gain = result.total_taxas - result.total_taxas_coverflex;
 
         // novo campo do custo total para empresa;
         result.custo_total_empresa = (result.incidencia * empresa_taxa_ss_social) + result.subsidio_refeicao + input.outros_IRS + input.outros_isentos;
-        result.custo_total_empresa_coverflex = (result.incidencia_coverflex * empresa_taxa_ss_social) + result.subsidio_refeicao + input.outros_IRS + input.outros_isentos;
+        result.custo_total_empresa_coverflex = (result.incidencia_coverflex * empresa_taxa_ss_social) + result.subsidio_refeicao + result.benefits_plan;
         //	Old version: result.custo_total_empresa = ((input.base + input.outros_IRS_SS  +  result.subsidios + result.extra_subsidio_refeicao)  * empresa_taxa_ss_social) + result.subsidio_refeicao +  input.outros_IRS + input.outros_isentos;
 
 
