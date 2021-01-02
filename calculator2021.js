@@ -12,6 +12,10 @@ catch (err) {
 app.config(function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
+app.run(["$locale", function ($locale) {
+    $locale.NUMBER_FORMATS.GROUP_SEP = " ";
+    $locale.NUMBER_FORMATS.DECIMAL_SEP = ".";
+}]);
 
 function SalarioLiquidoCtrl($scope, $timeout) {
     var empresa_taxa_ss_social = 1.2375;
@@ -63,9 +67,9 @@ function SalarioLiquidoCtrl($scope, $timeout) {
 
     //LEGISREF: 
     $scope.situacoes = [
-        { situacao: "SOL", descricao: "Não casado" },
-        { situacao: "CAS1", descricao: "Casado, 1 titular" },
-        { situacao: "CAS2", descricao: "Casado, 2 titulares" }
+        { situacao: "SOL", descricao: "Single" },
+        { situacao: "CAS1", descricao: "Married, 1 holder" },
+        { situacao: "CAS2", descricao: "Married, 2 holders" }
     ];
 
     //LEGISREF:
