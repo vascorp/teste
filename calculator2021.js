@@ -14,7 +14,7 @@ app.config(function ($interpolateProvider) {
 });
 app.run(["$locale", function ($locale) {
     $locale.NUMBER_FORMATS.GROUP_SEP = " ";
-    $locale.NUMBER_FORMATS.DECIMAL_SEP = ".";
+    //$locale.NUMBER_FORMATS.DECIMAL_SEP = ".";
 }]);
 
 function SalarioLiquidoCtrl($scope, $timeout) {
