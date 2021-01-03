@@ -79,7 +79,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         { numero: 2, descricao: "2" },
         { numero: 3, descricao: "3" },
         { numero: 4, descricao: "4" },
-        { numero: 5, descricao: "5 ou mais" }
+        { numero: 5, descricao: "5+" }
     ];
 
     //LEGISREF:
