@@ -19,7 +19,9 @@ app.run(["$locale", function ($locale) {
 
 app.filter('ceil', function() {
     return function(input) {
-        return Math.ceil(input);
+        var val = Math.ceil(input);
+        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        return val;
     };
 });
 
