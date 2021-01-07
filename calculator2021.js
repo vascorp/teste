@@ -17,6 +17,12 @@ app.run(["$locale", function ($locale) {
     //$locale.NUMBER_FORMATS.DECIMAL_SEP = ".";
 }]);
 
+app.filter('ceil', function() {
+    return function(input) {
+        return Math.ceil(input);
+    };
+});
+
 function SalarioLiquidoCtrl($scope, $timeout) {
     var empresa_taxa_ss_social = 1.2375;
     $scope.input = {
