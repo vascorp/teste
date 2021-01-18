@@ -2520,9 +2520,10 @@ function SalarioLiquidoCtrl($scope, $timeout) {
       result.subsidio_refeicao_coverflex = input.outros_IRS_SS*14 < (input.refeicao_valor * input.refeicao_dias*11) ? (input.outros_IRS_SS*14)/11 : (input.refeicao_valor * input.refeicao_dias);
       console.log('result.subsidio_refeicao_coverflex', result.subsidio_refeicao_coverflex)
 
+      result.bruto_coverflex += lt.subsidio_refeicao_coverflex;
+
       var half_benefits = input.outros_IRS_SS * 14 > (input.refeicao_valor * input.refeicao_dias*11) ? ((input.outros_IRS_SS * 14)-(input.refeicao_valor * input.refeicao_dias*11)) / 12 / 2 : 0;
 
-      console.log('half_benefits', half_benefits);
       result.bruto_coverflex += half_benefits;
       result.tributavel_coverflex += half_benefits;
       result.bruto_coverflex += half_benefits; //isento IRS e SS
