@@ -26,6 +26,14 @@ app.filter('ceil', function () {
   };
 });
 
+app.filter('round', function () {
+  return function (input) {
+    var val = Math.round(input);
+    val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return val;
+  };
+});
+
 function SalarioLiquidoCtrl($scope, $timeout) {
   var empresa_taxa_ss_social = 1.2375;
   $scope.input = {
