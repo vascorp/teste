@@ -2507,7 +2507,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
     }else{
       console.log('input.outros_IRS_SS', input.outros_IRS_SS*14);
       console.log('input.refeicao_valor * input.refeicao_dias', (input.refeicao_valor * input.refeicao_dias)*14);
-      result.subsidio_refeicao_coverflex = input.outros_IRS_SS*14 < (input.refeicao_valor * input.refeicao_dias*11) ? input.outros_IRS_SS*14 : (input.refeicao_valor * input.refeicao_dias*11);
+      result.subsidio_refeicao_coverflex = input.outros_IRS_SS*14 < (input.refeicao_valor * input.refeicao_dias*11) ? (input.outros_IRS_SS*14)/11 : (input.refeicao_valor * input.refeicao_dias);
     }
     /*
         if (input.outros_IRS_SS) {
