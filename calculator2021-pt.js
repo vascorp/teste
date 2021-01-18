@@ -2506,17 +2506,26 @@ function SalarioLiquidoCtrl($scope, $timeout) {
 
       //result.subsidio_refeicao = result.subsidio_refeicao * 11; //11meses
       //console.log('result.subsidio_refeicao', result.subsidio_refeicao)
-      result.tributavel +=
-        Math.max(input.refeicao_valor - input.refeicao_tipo.isento, 0) *
-        input.refeicao_dias;
-      result.tributavel_coverflex +=
-        Math.max(input.refeicao_valor - input.refeicao_tipo.isento, 0) *
-        input.refeicao_dias;
+      result.tributavel += Math.max(input.refeicao_valor - input.refeicao_tipo.isento, 0) * input.refeicao_dias;
+      result.tributavel_coverflex += Math.max(input.refeicao_valor - input.refeicao_tipo.isento, 0) * input.refeicao_dias;
+
+      var half_benefits = (input.outros_IRS_SS * 14) / 12 / 2;
+      result.bruto_coverflex += half_benefits;
+      result.tributavel_coverflex += half_benefits;
+      result.bruto_coverflex += half_benefits; //isento IRS e SS
+      result.benefits_plan += half_benefits * 2;
     }else{
       console.log('input.outros_IRS_SS', input.outros_IRS_SS);
       console.log('input.refeicao_valor * input.refeicao_dias', (input.refeicao_valor * input.refeicao_dias));
       result.subsidio_refeicao_coverflex = input.outros_IRS_SS*14 < (input.refeicao_valor * input.refeicao_dias*11) ? (input.outros_IRS_SS*14)/11 : (input.refeicao_valor * input.refeicao_dias);
       console.log('result.subsidio_refeicao_coverflex', result.subsidio_refeicao_coverflex)
+
+      var half_benefits = (input.outros_IRS_SS * 14) / 12 / 2;
+      console.log('half_benefits', half_benefits);
+      result.bruto_coverflex += half_benefits;
+      result.tributavel_coverflex += half_benefits;
+      result.bruto_coverflex += half_benefits; //isento IRS e SS
+      result.benefits_plan += half_benefits * 2;
     }
     /*
         if (input.outros_IRS_SS) {
@@ -2528,11 +2537,6 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.incidencia_coverflex += input.outros_IRS_SS;
         }
         */
-      var half_benefits = (input.outros_IRS_SS * 14) / 12 / 2;
-      result.bruto_coverflex += half_benefits;
-      result.tributavel_coverflex += half_benefits;
-      result.bruto_coverflex += half_benefits; //isento IRS e SS
-      result.benefits_plan += half_benefits * 2;
 
     if (input.outros_IRS) {
       result.bruto += input.outros_IRS;
