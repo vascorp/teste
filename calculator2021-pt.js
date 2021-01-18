@@ -2669,7 +2669,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
       input.outros_isentos;
     result.custo_total_empresa_coverflex =
       result.incidencia_coverflex * empresa_taxa_ss_social +
-      result.subsidio_refeicao +
+      result.subsidio_refeicao_coverflex +
       result.benefits_plan;
     //	Old version: result.custo_total_empresa = ((input.base + input.outros_IRS_SS  +  result.subsidios + result.extra_subsidio_refeicao)  * empresa_taxa_ss_social) + result.subsidio_refeicao +  input.outros_IRS + input.outros_isentos;
 
