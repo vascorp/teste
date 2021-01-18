@@ -2478,6 +2478,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
       result.incidencia_coverflex += input.extra;
     }
 
+
     // alteração para suportar o não tenho subs alimentação
     if (input.refeicao_tipo.tipo != 'NAOTENHO') {
       result.bruto += input.refeicao_valor * input.refeicao_dias;
@@ -2504,7 +2505,7 @@ function SalarioLiquidoCtrl($scope, $timeout) {
         Math.max(input.refeicao_valor - input.refeicao_tipo.isento, 0) *
         input.refeicao_dias;
     }else{
-      result.subsidio_refeicao_coverflex = input.outros_IRS_SS < input.refeicao_valor * input.refeicao_dias ? input.outros_IRS_SS : input.refeicao_valor * input.refeicao_dias;
+      result.subsidio_refeicao_coverflex = (input.outros_IRS_SS * 14) / 12 < input.refeicao_valor * input.refeicao_dias ? (input.outros_IRS_SS * 14) / 12 : input.refeicao_valor * input.refeicao_dias;
     }
     /*
         if (input.outros_IRS_SS) {
@@ -2516,11 +2517,11 @@ function SalarioLiquidoCtrl($scope, $timeout) {
             result.incidencia_coverflex += input.outros_IRS_SS;
         }
         */
-    var half_benefits = (input.outros_IRS_SS * 14) / 12 / 2;
-    result.bruto_coverflex += half_benefits;
-    result.tributavel_coverflex += half_benefits;
-    result.bruto_coverflex += half_benefits; //isento IRS e SS
-    result.benefits_plan += half_benefits * 2;
+      var half_benefits = (input.outros_IRS_SS * 14) / 12 / 2;
+      result.bruto_coverflex += half_benefits;
+      result.tributavel_coverflex += half_benefits;
+      result.bruto_coverflex += half_benefits; //isento IRS e SS
+      result.benefits_plan += half_benefits * 2;
 
     if (input.outros_IRS) {
       result.bruto += input.outros_IRS;
