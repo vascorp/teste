@@ -1,3 +1,5 @@
+
+console.log('first');
 function fixMenu (){
     var links = document.getElementsByTagName('a');
 
@@ -7,5 +9,5 @@ function fixMenu (){
         if(links[i].href.includes("#")) links[i].setAttribute('data-url', "#");
     }
 }
-
+console.log(this);
 fixMenu();
